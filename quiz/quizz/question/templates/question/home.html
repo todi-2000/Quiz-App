@@ -1,0 +1,12 @@
+{% extends "question/base.html" %}
+{% block content %}
+<div class="d-flex">
+    <div class="boxed"> 
+        <h1>Let's Start The Quiz!!</h1>
+        <div class="text-center">
+        <a class="text-dark" href="{% url 'login' %}"><button class="btn default" type="submit">
+        Start</button></a>
+        </div>
+    </div>
+</div>
+{% endblock content %}
