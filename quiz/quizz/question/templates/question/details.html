@@ -1,0 +1,13 @@
+{% extends "question/base.html" %}
+{% block content %}
+<div class="d-flex">
+    <div class="boxed">
+        {% for q in question %}
+            <h3 class="ques">Question {{forloop.counter}}.<br> {{ q }}</h3>
+            <form style="padding-left:65px;padding-top:10px;">
+            <input style="padding-bottom:20px;"type="text" value="type your answer here">
+            </form
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

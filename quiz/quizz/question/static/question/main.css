@@ -47,3 +47,10 @@ padding-left:5px; padding-right:5px;
   .default:hover {
     background: #FF5F6D;
   }
+
+  .ques
+  {
+    padding-left:65px;
+    padding-top:60px;
+    font-family:serif;
+  }
