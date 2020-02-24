@@ -11,7 +11,6 @@ class Question(models.Model):
 class Choice(models.Model):
     question=models.ForeignKey(Question,on_delete=models.CASCADE)
     choice=models.CharField(max_length=500)
-    answer=models.BooleanField(max_length=2,default=False,null=False)
 
     def __str__(self):
         return self.choice

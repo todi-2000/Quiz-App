@@ -12,7 +12,9 @@ def rules(request):
 @login_required
 def details(request,question_id):
     question=Question.objects.get(pk=question_id)
+    choice=Choice.objects.get(question=question.id)
     context={
-        'question':question
+        'question':question,
+        'choice':choice
     }
     return render(request,'question/details.html',context)
