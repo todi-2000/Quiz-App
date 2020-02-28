@@ -4,10 +4,11 @@
     <div class="boxed">
         <h3 class="ques">Question<br>{{ question.question_text }}</h3>
         <form method="POST">
+            {% csrf_token %}
             <div style="padding-left:70px;">
             <input type='text' name="ans" placeholder="Answer" required>
-            </br>
-            <input type="submit" value="submit">
+            </br></br>
+            <input type="submit" value="Submit">
             </br>
             </div>
         </form>
