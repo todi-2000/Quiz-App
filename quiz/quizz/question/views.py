@@ -14,12 +14,12 @@ def rules(request):
 def details(request,question_id):
     question=Question.objects.get(pk=question_id)
     choice=Choice.objects.get(question=question.id)
-    if request.method=='POST':
-        if request.POST.get('ans',default=None) == choice:
-            messages.success(request,f'Correct Answer')
-            print('correct')
     context={
         'question':question
     }
-
+    if request.method=='POST':
+        c=request.POST['ans'] 
+        if c==choice:
+            print('correct')
+            question_id += 1
     return render(request,'question/details.html',context)
