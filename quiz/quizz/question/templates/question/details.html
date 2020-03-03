@@ -2,7 +2,7 @@
 {% block content %}
 <div class="d-flex">
     <div class="boxed">
-        <h3 class="ques">Question<br>{{ question.question_text }}</h3>
+        <h3 class="ques">Question<br>{{ ques.question_text }}</h3>
         <form method="POST">
             {% csrf_token %}
             <div style="padding-left:70px;">
