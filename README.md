@@ -22,7 +22,7 @@ env\Scripts\activate
 ```
 - Change Directory:
 ```
-cd quiz/quizz
+cd quizz
 ```
 - Install dependencies using
 ```
