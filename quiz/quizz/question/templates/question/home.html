@@ -1,11 +1,51 @@
 {% extends "question/base.html" %}
+{% load static %}
 {% block content %}
 <div class="d-flex">
     <div class="boxed"> 
-        <h1>Let's Start The Quiz!!</h1>
-        <div class="text-center">
-        <a class="text-dark" href="{% url 'login' %}"><button class="btn default" type="submit">
-        Start</button></a>
+        <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="font-size: 20px;">
+            <a class="navbar-brand" href="#" style="margin-top: 0%;margin-left:0%"><img src="{% static 'question/images/quiz5.png' %}" ></img></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'home' %}" style="color: salmon;">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'rules' %}" style="color: salmon;">Let's Start</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'leaderboard' %}" style="color: salmon;">Leaderboard</a>
+                    </li>
+                    {% if auth == 1 %}
+                    <li class="nav-item">
+                        <a class=" nav-link" href="{% url 'logout' %}" style="color: salmon;">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class=" nav-link" href="{% url 'login' %}" style="color: salmon;">Login/Signup</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+        <div style="overflow-x: hidden;">
+            <div class="row" style="margin-top:10%;justify-content: center;">
+                <div class="col-sm-5">
+                    <div class="card">
+                        <div class="card-body">
+                                <h4 class="card-title" style="text-align: center;">Your DashBoard</h4>
+                                <h5 class="card-title">Username:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ user }}</h5>
+                                <h5 class="card-title">Question Attempted:&nbsp;&nbsp;&emsp;{{ level }}</h5>
+                                <h5 class="card-title">Score:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&emsp;{{ score }}</h5>
+                                <a href="{% url 'rules' %}" class="btn btn-block btn-warning">Let's Start</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -123,7 +123,3 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-LOGIN_REDIRECT_URL='rules'
-LOGIN_URL='login'
-AUTH_PROFILE_MODULE = "account.profile"

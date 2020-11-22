@@ -1,26 +1,54 @@
-from django.shortcuts import render,get_object_or_404
-from .models import Question,Choice
+from django.shortcuts import render,get_object_or_404,redirect
+from .models import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 
 # Create your views here.
 def home(request):
+    if request.user.is_authenticated:
+        context={
+            'user':request.user.username,
+            'level':Student.objects.get(student=request.user).slevel-1,
+            'score':Student.objects.get(student=request.user).score,
+            'auth':1
+        }
+        return render(request,"question/home.html",context)
     return render(request,"question/home.html")
 
 def rules(request):
     return render(request,'question/rules.html')
 
-@login_required
-def details(request,question_id):
-    quest=Question.objects.get(pk=question_id)
-    choice=str(Choice.objects.get(question=quest.id))
-    context = {'ques':quest}
-    if request.method=='POST':
-        c=request.POST['ans'] 
-        if c==choice:
-            question_id += 1
-            nextques= Question.objects.get(pk=question_id)
-            context={'ques':nextques}
-            return HttpResponseRedirect("/questions/"+str(question_id))
-    return render(request,'question/details.html',context)
+def details(request,level):
+    if request.user.is_authenticated:
+        st=Student.objects.get(student=request.user)
+        level=st.slevel
+        try:
+            quest=Question.objects.get(level=level)
+            choice=str(Choice.objects.get(question=quest.id))
+            context = {'ques':quest}
+            if request.method=='POST':
+                c=request.POST['ans']
+                if c==choice:
+                    st.score+=quest.max_marks
+                    level += 1
+                    st.slevel=level
+                    st.save()
+                    try:
+                        nextques= Question.objects.get(level=level)
+                        context={'ques':nextques}
+                        return HttpResponseRedirect("/questions/"+str(level))
+                    except Question.DoesNotExist:
+                        return redirect("home")
+            return render(request,'question/details.html',context)
+        except Question.DoesNotExist:
+                return redirect('home')
+    else:
+        return redirect('login')
+ 
+def leaderboard(request):
+    profiles = Student.objects.order_by('-score')
+    context = {
+        'profiles': profiles,
+    }
+    return render(request,'question/leaderboard.html',context=context)
