@@ -20,7 +20,7 @@ git checkout -b <branch-name>
 ```
 - Create virtual environment:
 ```
-python3 -m venv env
+python -m venv env
 env\Scripts\activate
 ```
 - Change Directory:
