@@ -11,13 +11,13 @@ def home(request):
             'user':request.user.username,
             'level':Student.objects.get(student=request.user).slevel-1,
             'score':Student.objects.get(student=request.user).score,
-            'auth':1
+            'auth': request.user.is_authenticated
         }
         return render(request,"question/home.html",context)
     return render(request,"question/home.html")
 
 def rules(request):
-    return render(request,'question/rules.html')
+    return render(request,'question/rules.html', {"auth": request.user.is_authenticated})
 
 def details(request,level):
     if request.user.is_authenticated:
@@ -26,7 +26,7 @@ def details(request,level):
         try:
             quest=Question.objects.get(level=level)
             choice=str(Choice.objects.get(question=quest.id))
-            context = {'ques':quest}
+            context = {'ques':quest, "auth": request.user.is_authenticated}
             if request.method=='POST':
                 c=request.POST['ans']
                 if c==choice:
@@ -50,5 +50,6 @@ def leaderboard(request):
     profiles = Student.objects.order_by('-score')
     context = {
         'profiles': profiles,
+        "auth": request.user.is_authenticated
     }
     return render(request,'question/leaderboard.html',context=context)

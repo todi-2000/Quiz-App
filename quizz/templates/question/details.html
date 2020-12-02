@@ -1,48 +1,17 @@
-{% extends "question/base.html" %}
-{% load static %}
-{% block content %}
-<div class="d-flex">
-    <div class="boxed">
-        <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="font-size: 20px;">
-            <a class="navbar-brand" href="#" style="margin-top: 0%;margin-left:0%"><img
-                    src="{% static 'question/images/quiz5.png' %}"></img></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'home' %}" style="color: salmon;">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'rules' %}" style="color: salmon;">Let's Start</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'leaderboard' %}" style="color: salmon;">Leaderboard</a>
-                    </li>
-                    {% if user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class=" nav-link" href="{% url 'logout' %}" style="color: salmon;">Logout</a>
-                    </li>
-                    {% else %}
-                    <li class="nav-item">
-                        <a class=" nav-link" href="{% url 'login' %}" style="color: salmon;">Login/Signup</a>
-                        {% endif %}
-                </ul>
-            </div>
-        </nav>
-        <h3 class="ques">Question<br>{{ ques.question_text }}</h3>
-        <form method="POST">
-            {% csrf_token %}
-            <div style="padding-left:70px;">
-            <input type='text' name="ans" placeholder="Answer" required>
-            </br></br>
-            <input type="submit" value="Submit">
-            </br>
-            </div>
-        </form>
-    </div>
+{% extends "question/base.html" %} {% block content %} 
+{% include "question/header.html" %}
+<div class="details">
+  <h1>{{ ques.question_text }}</h1>
+  <form method="POST">
+    {% csrf_token %}
+    <input
+      type="text"
+      name="ans"
+      placeholder="Answer"
+      required
+      autocomplete="off"
+    />
+    <button type="submit">Submit</button>
+  </form>
 </div>
-{% endblock content %}
+{% endblock %}

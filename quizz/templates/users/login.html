@@ -1,24 +1,28 @@
-{% extends "question/base.html" %}
-{% load crispy_forms_tags %}
-{% block content %}
-
-<div class='d-flex'>
-    <div class="boxed users">
-        <form method='POST'>
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Login</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <button class="btn default" type="submit">Login</button>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                New User?<a class="ml-2" href="{%url 'register' %}">Sign Up</a>
-            </small>
-        </div>
-    </div>
-    </div>
+{% extends "question/base.html" %} {% block content %}
+<div class="cred">
+  <h2>Login</h2>
+  <form method="POST" action="{% url "login" %}">
+    {% csrf_token %}
+    <input
+      type="text"
+      name="username"
+      placeholder="Username"
+      maxlength="15"
+      autocomplete="off"
+      required
+    />
+    <input
+      type="password"
+      name="password"
+      placeholder="Password"
+      minlength="8"
+      autocomplete="off"
+      required
+    />
+    <button type="submit">Log in</button>
+  </form>
+  <p class="muted">
+    New User?<a class="ml-2" href="{%url 'register' %}"> Sign Up</a>
+  </p>
 </div>
-
 {% endblock content %}

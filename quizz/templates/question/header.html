@@ -1,0 +1,16 @@
+{% load static %}
+<header>
+  <img src="{% static "question/images/quiz.png" %}" alt="Logo">
+  <nav>
+    <ul>
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url "rules" %}">Let's Start</a></li>
+      <li><a href="{% url "leaderboard" %}">Leaderboard</a></li>
+      {% if auth %}
+      <li><a href="{% url "logout" %}">Logout</a></li>
+      {% else %}
+      <li><a href="{% url "login" %}">Login</a></li>
+      {% endif %}
+    </ul>
+  </nav>
+</header>

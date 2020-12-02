@@ -1,50 +1,24 @@
-{% extends "question/base.html" %}
-{% load static %}
-{% block content %}
-<div class='d-flex'>
-    <div class='boxed users'>
-            <nav class="navbar navbar-expand-lg navbar-light navbar-right" style="font-size: 20px;">
-                <a class="navbar-brand" href="#" style="margin-top: 0%;margin-left:0%"><img
-                        src="{% static 'question/images/quiz5.png' %}"></img></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-            
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'home' %}" style="color: salmon;">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'rules' %}" style="color: salmon;">Let's Start</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'leaderboard' %}" style="color: salmon;">Leaderboard</a>
-                        </li>
-                        {%if user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class=" nav-link" href="{% url 'logout' %}" style="color: salmon;">Logout</a>
-                        </li>
-                        {% else %}
-                        <li class="nav-item">
-                            <a class=" nav-link" href="{% url 'login' %}" style="color: salmon;">Login/Signup</a></li>>
-                            {% endif %}
-                    </ul>
-                </div>
-            </nav>
-            <legend style="text-align:center;font-size:40px; "class="border-bottom mb-4">RULES</legend>
-            <ul style="padding-right:10px;" class=text-justify>
-                <li>The decision of the quiz-master will be final and will not be subjected to any change.</li>
-                <li>The participants shall not be allowed to use mobile or other electronic instruments.</li>
-                <li>The questions shall be in the form of multiple choice, True / False statement, Specific answer question etc.</li>
-                <li>Audience/Supporters shall not give any hints or clues to the competitors.</li><br>
-            </ul>
-        <div class="text-center">
-            <a class="text-dark" href="{% url 'detail' 1 %}"><button class="btn default" type="submit">
-            Start</button></a>
-        </div>
-    </div>
+{% extends "question/base.html" %} {% block content %} 
+{% include "question/header.html" %}
+<div class="rules">
+  <h1>Rules</h1>
+  <ul>
+    <li>
+      The decision of the quiz-master will be final and will not be subjected to
+      any change.
+    </li>
+    <li>
+      The participants shall not be allowed to use mobile or other electronic
+      instruments.
+    </li>
+    <li>
+      The questions shall be in the form of multiple choice, True / False
+      statement, Specific answer question etc.
+    </li>
+    <li>
+      Audience/Supporters shall not give any hints or clues to the competitors.
+    </li>
+  </ul>
+  <a href="{% url 'detail' 1 %}" class="button">Let's start</a>
 </div>
-
-{% endblock content %}
+{% endblock %}
