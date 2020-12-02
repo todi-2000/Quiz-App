@@ -1,6 +1,9 @@
 # Quiz-App
 A website where user have to only register for attempting quizzes and can also leaderboard. 
 
+## Discord Channel
+[![chat on discord](https://img.shields.io/badge/chat-on%20discord-brightgreen)](https://discord.gg/PG6sr7Np)
+
 ## Screenshots
 ![Screenshot (143)](https://user-images.githubusercontent.com/47568904/99914364-ea6bbf80-2d22-11eb-8403-fbacfb0d1a31.png)
 ![Screenshot (144)](https://user-images.githubusercontent.com/47568904/99914368-f788ae80-2d22-11eb-81fa-e377707174cd.png)
