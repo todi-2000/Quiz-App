@@ -29,7 +29,7 @@ def details(request,level):
             context = {'ques':quest, "auth": request.user.is_authenticated}
             if request.method=='POST':
                 c=request.POST['ans']
-                if c==choice:
+                if c.lower() == choice.lower():
                     st.score+=quest.max_marks
                     level += 1
                     st.slevel=level
