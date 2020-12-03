@@ -1,58 +1,208 @@
-body
-{
-    background: #FF5F6D;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #FFC371, #FF5F6D);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #FFC371, #FF5F6D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-
-}
-.boxed
-{
-    box-sizing: border-box;
-    width: 1000px;
-    height: 550px;
-    border-color: blanchedalmond;
-    margin-left: 10%;
-    margin-right: 10%;
-    margin-bottom: 1%;
-    margin-top: 2%;
-    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSGD-9yVUWS3WSJK_6GrTLqP8y6eS-MLD69akoRytoESzNmxkOC&s');
-    overflow: auto;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-h1
-{
-    text-align: center;
-    padding-top: 15%;
-    color: black;
+html {
+  font-size: 62.5%;
+  position: relative;
 }
 
-.users{
-padding-left:5px; padding-right:5px;
+html,
+body {
+  height: 100%;
 }
 
-.btn {
-    border: 1px solid black;
-    background-color: white;
-    color: black;
-    padding: 13px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
+body {
+  font-family: "Montserrat", sans-serif;
+  width: calc(100% - (clamp(1px, 6vw, 77px) * 2));
+  margin: auto;
+}
 
-  .default {
-    border-color:black;
-    color: black;
-  }
-  
-  .default:hover {
-    background: #FF5F6D;
-  }
+header {
+  padding-top: 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
-  .ques
-  {
-    padding-left:65px;
-    padding-top:60px;
-    font-family:serif;
-  }
+header img {
+  width: 13rem;
+}
 
- 
+header nav ul {
+  display: flex;
+  width: 50rem;
+  list-style: none;
+  justify-content: space-between;
+  font-size: 1.6rem;
+  font-size: clamp(1rem, 1.4vw, 1.5rem);
+}
+
+a {
+  text-decoration: none;
+  color: #f68b1e;
+  font-weight: 500;
+}
+
+a:hover {
+  color: #7c440c;
+}
+
+main {
+  display: flex;
+  margin: 4rem 0;
+  gap: 6rem;
+}
+
+main .dashboard {
+  width: 50%;
+  display: flex;
+  align-items: center;
+}
+
+main .illustration {
+  width: 50%;
+  height: min(33vw, 44.743rem);
+  background-image: url("../question/images/quiz-illustration.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+table {
+  background-color: #2f2e41;
+  color: #ffffff;
+  border-radius: 1.2rem;
+  font-size: clamp(1rem, 1.4vw, 1.5rem);
+  padding: 1.5rem;
+}
+
+table td,
+th {
+  padding: 1rem;
+  padding-right: 5rem;
+}
+
+table tr td:first-child {
+  font-weight: 500;
+  color: #f68b1e;
+}
+
+.rules {
+  margin: 5rem 0;
+  text-align: center;
+}
+
+.rules h1 {
+  text-align: center;
+  color: #2f2e41;
+  font-weight: 600;
+  font-size: 3rem;
+  margin-bottom: 4rem;
+}
+
+.rules ul {
+  margin-bottom: 4rem;
+  text-align: left;
+}
+
+.rules ul li {
+  font-size: 1.6rem;
+  line-height: 2.5;
+}
+
+.rules ul li::marker {
+  color: #f68b1e;
+}
+
+.leaderboard {
+  margin: 6rem 0;
+}
+
+.leaderboard table {
+  width: 100%;
+}
+
+.leaderboard table td,
+th {
+  border: 0.1rem solid rgb(75, 75, 134);
+}
+
+.details {
+  margin: 6rem 0;
+}
+
+.details h1 {
+  margin-bottom: 4rem;
+}
+
+form {
+  text-align: center;
+}
+
+form input {
+  display: block;
+  width: 100%;
+  padding: 2rem;
+  border-radius: 1rem;
+  border: 0.1rem solid #f68b1e;
+  margin-bottom: 2rem;
+}
+
+form input::placeholder {
+  font-family: "Montserrat", sans-serif;
+}
+
+form input:focus,
+form button:focus,
+a.button:focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.3rem rgba(216, 142, 69, 0.56);
+}
+
+form button,
+a.button {
+  padding: 1.5rem 3.4rem;
+  border-radius: 0.8rem;
+  border: none;
+  background-color: #2f2e41;
+  color: #ffffff;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1.4rem;
+  outline: 0;
+}
+
+form button:active {
+  transform: scale(0.95);
+}
+
+.cred {
+  padding: 5rem 0;
+}
+
+.cred h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 4rem;
+  color: #2f2e41;
+}
+
+.cred form {
+  margin: auto;
+  width: 60rem;
+}
+
+.muted {
+  font-size: 1.5rem;
+  margin-top: 4rem;
+  text-align: center;
+}
+
+.error {
+  text-align: center;
+  margin-bottom: 0.5rem;
+  color: yellow;
+}
