@@ -2,7 +2,7 @@
 {% include "question/header.html" %}
 <div class="details">
   <h1>{{ ques.question_text }}</h1>
-  <form method="POST">
+  <form  method="POST" >
     {% csrf_token %}
     <input
       type="text"
@@ -11,7 +11,8 @@
       required
       autocomplete="off"
     />
-    <button type="submit">Submit</button>
+    <button id="timer">Timer</button>
+    <button id="button" type="submit" >Submit</button>
   </form>
 </div>
 {% endblock %}

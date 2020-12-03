@@ -40,6 +40,8 @@ def details(request,level):
                         return HttpResponseRedirect("/questions/"+str(level))
                     except Question.DoesNotExist:
                         return redirect("home")
+                else:
+                    return redirect("home")
             return render(request,'question/details.html',context)
         except Question.DoesNotExist:
                 return redirect('home')
