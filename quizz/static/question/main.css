@@ -106,6 +106,7 @@ table tr td:first-child {
 .rules ul {
   margin-bottom: 4rem;
   text-align: left;
+  list-style-position: inside;
 }
 
 .rules ul li {
@@ -119,6 +120,7 @@ table tr td:first-child {
 
 .leaderboard {
   margin: 6rem 0;
+  overflow: auto;
 }
 
 .leaderboard table {
@@ -157,6 +159,7 @@ form input::placeholder {
 
 form input:focus,
 form button:focus,
+.nav-btn:focus,
 a.button:focus {
   outline: 0;
   box-shadow: 0 0 0 0.3rem rgba(216, 142, 69, 0.56);
@@ -205,4 +208,85 @@ form button:active {
   text-align: center;
   margin-bottom: 0.5rem;
   color: yellow;
+}
+
+.nav-btn {
+  padding: 0 2rem;
+  font-size: 2.4rem;
+  display: none;
+  background-color: #f68b1e;
+  border: 0.1rem solid #c4670b;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.mobile {
+  position: absolute;
+  background-color: #2f2e41bb;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 30rem;
+  padding-top: 7rem;
+  display: none;
+}
+
+.mobile ul {
+  flex-direction: column;
+  width: 100%;
+}
+
+.mobile ul li {
+  padding: 2.5rem;
+  padding-left: 4rem;
+}
+
+.mobile ul li:hover {
+  background-color: #1c1b2c;
+}
+
+.nav-btn.visible,
+.mobile.visible {
+  display: initial;
+}
+
+.nav-btn.abs {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+}
+
+@media (max-width: 991px) {
+  header img {
+    width: 10rem;
+  }
+  main {
+    flex-direction: column;
+  }
+  main .illustration,
+  main .dashboard {
+    width: 100%;
+  }
+  main .dashboard {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 340px) {
+  table td {
+    padding-right: 1rem;
+  }
+}
+
+@media (max-width: 694px) {
+  .cred form {
+    width: 100%;
+  }
+}
+
+@media (max-width: 342px) {
+  .mobile {
+    width: 100%;
+  }
 }
