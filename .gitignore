@@ -4,15 +4,12 @@
 __pycache__
 
 # Env
-.env
+env
 myvenv/
 venv/
 
 # Database
 db.sqlite3
-
-# Static folder
-static/
 
 # macOS
 ._*
