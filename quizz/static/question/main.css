@@ -182,7 +182,6 @@ form button:active {
   transform: scale(0.95);
 }
 
-
 .cred {
   padding: 5rem 0;
 }
@@ -205,10 +204,45 @@ form button:active {
   text-align: center;
 }
 
-.error {
+.success,
+.error,
+.info {
+  width: 100%;
+  position: absolute;
+  top: -1.2rem;
+  left: 0;
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding: 0.6rem 0;
   text-align: center;
-  margin-bottom: 0.5rem;
-  color: yellow;
+  animation: comefromtop 0.3s forwards ease, gototop 0.5s forwards ease 2s;
+}
+
+@keyframes comefromtop {
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes gototop {
+  100% {
+    top: -4rem;
+  }
+}
+
+.success {
+  background-color: #218838;
+  color: #ffffff;
+}
+
+.error {
+  background-color: #bd2130;
+  color: #ffffff;
+}
+
+.info {
+  background-color: #2f2e41;
+  color: #ffffff;
 }
 
 .nav-btn {
