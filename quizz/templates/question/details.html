@@ -1,8 +1,8 @@
-{% extends "question/base.html" %} {% block content %} 
+{% extends "question/base.html" %} {% load static %} {% block content %}
 {% include "question/header.html" %}
 <div class="details">
   <h1>{{ ques.question_text }}</h1>
-  <form  method="POST" >
+  <form method="POST">
     {% csrf_token %}
     <input
       type="text"
@@ -12,7 +12,8 @@
       autocomplete="off"
     />
     <button id="timer">Timer</button>
-    <button id="button" type="submit" >Submit</button>
+    <button id="button" type="submit">Submit</button>
   </form>
 </div>
+<script src="{% static "question/timer.js" %}"></script>
 {% endblock %}
