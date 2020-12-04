@@ -3,7 +3,7 @@
 A website where user have to only register for attempting quizzes and can also leaderboard.
 
 ## Discord Channel
-[![chat on discord](https://img.shields.io/badge/chat-on%20discord-brightgreen)](https://discord.gg/PG6sr7Np)
+[![chat on discord](https://img.shields.io/badge/chat-on%20discord-brightgreen)](https://discord.gg/pVjcyPtwGx)
 
 ## Screenshots
 
