@@ -26,13 +26,15 @@ def register(request):
 
 def login(request):
     if not request.user.is_authenticated:
-        user = authenticate(username=request.POST.get("username"), password=request.POST.get("password"))
-        if user is not None:
-            auth_login(request, user)
-            messages.success(request, "Logged In Successfully")
-            return redirect('home')
-        else:
-            return render(request, 'users/login.html')
+        if request.method == "POST":
+            user = authenticate(username=request.POST.get("username"), password=request.POST.get("password"))
+            if user is not None:
+                auth_login(request, user)
+                messages.success(request, "Logged In Successfully")
+                return redirect('home')
+            else:
+                messages.error(request, "Invalid credentials")
+        return render(request, "users/login.html")
     else:
         return redirect("home")
 
