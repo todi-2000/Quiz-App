@@ -1,4 +1,8 @@
-{% extends "question/base.html" %} {% block content %}
+{% extends "question/base.html" %}
+{% load static %}
+
+{% block content %}
+
 {% include "question/header.html" %}
 <div class="details">
   <h1 id="ques">{{ ques.question_text }}</h1>

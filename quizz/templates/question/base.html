@@ -17,6 +17,11 @@
   </head>
   <body>
     {% block content %} {% endblock content %}
+    <div>
+      {% for message in messages %}
+        <p class= {{message.tags}}>{{message}}</p>
+      {% endfor %}
+    </div>
     <script src="{% static 'question/scripts.js' %}"></script>
   </body>
 </html>
