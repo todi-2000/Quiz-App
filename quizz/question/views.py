@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse, Http404
 
 a = False
 # Create your views here.
@@ -30,13 +30,10 @@ def details(request):
             context = {'ques':quest, "auth": request.user.is_authenticated}
             if request.method=='POST':
                 if request.POST.get("expired") == "YES":
-                    level += 1
-                    st.slevel=level
+                    st.score = st.score if (st.score == 0) else st.score - 1
                     st.save()
                     try:
-                        nextques= Question.objects.get(level=level)
-                        context={'ques':nextques}
-                        return JsonResponse({'ques': nextques.question_text})
+                        return JsonResponse({'ques': Question.objects.get(level=level).question_text})
                     except Question.DoesNotExist:
                         return JsonResponse({'ques': 'done'})
                 else:
@@ -71,7 +68,7 @@ def leaderboard(request):
 def end(request, score):
     global a
     if not a:
-        return HttpResponse("wrong request..")
+        raise Http404("Wrong Requst")
     else:
         a = False
         return render(request, "question/quiz-end-page.html", {"score": score})
