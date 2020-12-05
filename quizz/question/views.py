@@ -30,10 +30,13 @@ def details(request):
             context = {'ques':quest, "auth": request.user.is_authenticated}
             if request.method=='POST':
                 if request.POST.get("expired") == "YES":
-                    st.score = st.score if (st.score == 0) else st.score - 1
+                    level += 1
+                    st.slevel=level
                     st.save()
                     try:
-                        return JsonResponse({'ques': Question.objects.get(level=level).question_text})
+                        nextques= Question.objects.get(level=level)
+                        context={'ques':nextques}
+                        return JsonResponse({'ques': nextques.question_text})
                     except Question.DoesNotExist:
                         return JsonResponse({'ques': 'done'})
                 else:

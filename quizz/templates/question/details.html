@@ -30,7 +30,7 @@
         },
         success: data => {
           if (data.ques === 'done') {
-            window.location.href = '{% url "home" %}'
+            window.location.href = '/end/' + parseInt(data.score)
           }
           let ques = data.ques;
           if (ques !== 'wrong' && ques !== 'done') {
