@@ -2,8 +2,9 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect, JsonResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 
+a = False
 # Create your views here.
 def home(request):
     if request.user.is_authenticated:
@@ -28,31 +29,30 @@ def details(request):
             choice=str(Choice.objects.get(question=quest.id))
             context = {'ques':quest, "auth": request.user.is_authenticated}
             if request.method=='POST':
-                if request.POST['expired'] == 'Yes':
+                if request.POST.get("expired") == "YES":
                     level += 1
                     st.slevel=level
                     st.save()
                     try:
                         nextques= Question.objects.get(level=level)
                         context={'ques':nextques}
-                        # return HttpResponseRedirect("/questions/"+str(level))
                         return JsonResponse({'ques': nextques.question_text})
                     except Question.DoesNotExist:
                         return JsonResponse({'ques': 'done'})
                 else:
                     c=request.POST['ans']
-                    if c.lower() == choice.lower():
+                    if c.lower() == choice.lower(): #correct
                         st.score+=quest.max_marks
                         level += 1
                         st.slevel=level
                         st.save()
                         try:
                             nextques= Question.objects.get(level=level)
-                            context={'ques':nextques}
-                            # return HttpResponseRedirect("/questions/"+str(level))
                             return JsonResponse({'ques': nextques.question_text})
                         except Question.DoesNotExist:
-                            return JsonResponse({'ques': 'done'})
+                            global a
+                            a = True
+                            return JsonResponse({'ques': "done", "score": st.score})
                     return JsonResponse({'ques': 'wrong'})
             return render(request,'question/details.html',context)
         except Question.DoesNotExist:
@@ -67,3 +67,11 @@ def leaderboard(request):
         "auth": request.user.is_authenticated
     }
     return render(request,'question/leaderboard.html',context=context)
+
+def end(request, score):
+    global a
+    if not a:
+        return HttpResponse("wrong request..")
+    else:
+        a = False
+        return render(request, "question/quiz-end-page.html", {"score": score})
