@@ -2,7 +2,7 @@ from django.shortcuts import render,get_object_or_404,redirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 
 # Create your views here.
 def home(request):
@@ -19,7 +19,7 @@ def home(request):
 def rules(request):
     return render(request,'question/rules.html', {"auth": request.user.is_authenticated})
 
-def details(request,level):
+def details(request):
     if request.user.is_authenticated:
         st=Student.objects.get(student=request.user)
         level=st.slevel
@@ -28,20 +28,32 @@ def details(request,level):
             choice=str(Choice.objects.get(question=quest.id))
             context = {'ques':quest, "auth": request.user.is_authenticated}
             if request.method=='POST':
-                c=request.POST['ans']
-                if c.lower() == choice.lower():
-                    st.score+=quest.max_marks
+                if request.POST['expired'] == 'Yes':
                     level += 1
                     st.slevel=level
                     st.save()
                     try:
                         nextques= Question.objects.get(level=level)
                         context={'ques':nextques}
-                        return HttpResponseRedirect("/questions/"+str(level))
+                        # return HttpResponseRedirect("/questions/"+str(level))
+                        return JsonResponse({'ques': nextques.question_text})
                     except Question.DoesNotExist:
-                        return redirect("home")
+                        return JsonResponse({'ques': 'done'})
                 else:
-                    return redirect("home")
+                    c=request.POST['ans']
+                    if c.lower() == choice.lower():
+                        st.score+=quest.max_marks
+                        level += 1
+                        st.slevel=level
+                        st.save()
+                        try:
+                            nextques= Question.objects.get(level=level)
+                            context={'ques':nextques}
+                            # return HttpResponseRedirect("/questions/"+str(level))
+                            return JsonResponse({'ques': nextques.question_text})
+                        except Question.DoesNotExist:
+                            return JsonResponse({'ques': 'done'})
+                    return JsonResponse({'ques': 'wrong'})
             return render(request,'question/details.html',context)
         except Question.DoesNotExist:
                 return redirect('home')
