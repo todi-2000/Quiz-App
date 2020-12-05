@@ -325,3 +325,72 @@ form button:active {
     width: 100%;
   }
 }
+
+
+/* quiz-end-page */
+
+.end-page {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: hidden;
+}
+
+.end-page .bottom-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  bottom: 3rem;
+  transform: scale(0);
+  animation: animate-p 1s forwards linear 5s;
+  color: #ffffff;
+  font-weight: 400;
+  font-size: 4rem;
+  font-family: "Orbitron", sans-serif;
+}
+
+.end-page .bottom-text a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+@keyframes animate-p {
+  100% {
+    transform: scale(1);
+  }
+}
+
+.circle {
+  width: 240px;
+  height: 240px;
+  background-color: #ec4888;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  animation: zoom 0.7s forwards ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: content-box;
+  border: 150rem solid #392354;
+}
+
+.circle .score {
+  font-size: 6rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+@keyframes zoom {
+  100% {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.hidden {
+  display: none;
+}
