@@ -1,0 +1,25 @@
+{% extends "question/base.html" %} {% load static %} {% block content %}
+<div class="end-page">
+  <p class="hidden">{{ score }}</p>
+  <div class="circle">
+    <p class="score"></p>
+  </div>
+  <p class="bottom-text"><a href="{% url "home" %}">Keep Rocking</a></p>
+</div>
+<script>
+  window.addEventListener("load", function () {
+    inc();
+  });
+  var i = 0;
+  function inc() {
+    if (i <= parseInt(document.querySelector(".hidden").textContent)) {
+      document.querySelector(".score").textContent = i;
+      i++;
+      setTimeout(function () {
+        inc();
+      }, 100);
+    }
+  }
+</script>
+{% endblock %}
+

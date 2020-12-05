@@ -16,21 +16,21 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-  var count = 120; //time in seconds
+ var count = 120; //time in seconds
   var interval = setInterval(function () {
     document.getElementById('timer').innerHTML = count + " sec left";
     count--;
-    if (count == -2) {
+    if (count == -1) {
       $.ajax({
         type: "POST",
         url: "{% url 'detail' %}",
         data: {
           csrfmiddlewaretoken: '{{ csrf_token }}',
-          expired: 'Yes'
+          expired: 'YES'
         },
         success: data => {
           if (data.ques === 'done') {
-            window.location.href = '{% url "home" %}'
+            window.location.href = '/end/' + parseInt(data.score)
           }
           let ques = data.ques;
           if (ques !== 'wrong' && ques !== 'done') {
@@ -41,27 +41,29 @@
         }
       })
     }
-  }, 1000);
+  }, 1000); 
 
   $('#form').on('submit', e => {
-    e.preventDefault()
+    e.preventDefault();
     $.ajax({
       type: "POST",
       url: "{% url 'detail' %}",
       data: {
         csrfmiddlewaretoken: '{{ csrf_token }}',
         ans: $('#answer').val(),
-        expired: 'No'
+        expired: "NO"
       },
       success: data => {
         if (data.ques === 'done') {
-          window.location.href = '{% url "home" %}'
+          window.location.href = '/end/' + parseInt(data.score)
         }
-        let ques = data.ques;
-        if (ques !== 'wrong' && ques !== 'done') {
-          $('#ques').html(ques)
+        if (data.ques !== "wrong" && data.ques !== "done") {
+          $("#ques").html(data.ques)
           $('#form')[0].reset()
-          count = 120;
+          count = 120
+        }
+        if (data.ques === "wrong"){
+           $('#form')[0].reset()
         }
       }
     })
