@@ -5,22 +5,29 @@
 
 {% include "question/header.html" %}
 <div class="details">
-  <h1 id="ques">{{ ques.question_text }}</h1>
+  <div class="ques">
+    <h1 id="ques">{{ ques.question_text }}</h1>
+    <p id="timer">02:00</p>
+  </div>
   <form id="form" method="POST">
     {% csrf_token %}
     <input type="text" name="ans" id="answer" placeholder="Answer" required autocomplete="off" />
-    <button id="timer">Timer</button>
     <button id="button" type="submit">Submit</button>
   </form>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
- var count = 120; //time in seconds
-  var interval = setInterval(function () {
-    document.getElementById('timer').innerHTML = count + " sec left";
-    count--;
-    if (count == -1) {
+  let count = 120;
+  let minutes,seconds;
+  setInterval(function() {
+    minutes = parseInt(count / 60 , 10);
+    seconds = parseInt(count % 60 , 10);
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+    document.getElementById('timer').textContent = minutes + ":" + seconds;
+    count = count - 1;
+    if (count < 0){
       $.ajax({
         type: "POST",
         url: "{% url 'detail' %}",
@@ -41,7 +48,7 @@
         }
       })
     }
-  }, 1000); 
+  }, 1000)
 
   $('#form').on('submit', e => {
     e.preventDefault();
