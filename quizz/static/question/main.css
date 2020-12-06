@@ -134,6 +134,7 @@ th {
 
 .details {
   margin: 6rem 0;
+  position: relative;
 }
 
 .details .ques {
@@ -186,7 +187,8 @@ a.button {
   outline: 0;
 }
 
-form button:active {
+form button:active,
+.details .likes button#like-btn:active {
   transform: scale(0.95);
 }
 
@@ -415,4 +417,31 @@ form button:active {
 
 .hidden {
   display: none;
+}
+
+/* like btn */
+
+.details .likes {
+  position: absolute;
+  right: 0;
+  bottom: 1rem;
+  display: flex;
+  align-items: center;
+  width: 4.3rem;
+  justify-content: space-between;
+}
+
+.details .likes span#like-count {
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.details .likes button#like-btn {
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+}
+
+.details .likes button#like-btn:focus {
+  outline: 0;
 }
