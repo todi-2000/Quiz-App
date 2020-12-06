@@ -351,6 +351,12 @@ form button:active,
   }
 }
 
+@media (max-width: 275px) {
+  .details form {
+    text-align: left;
+  }
+}
+
 /* quiz-end-page */
 
 .end-page {
