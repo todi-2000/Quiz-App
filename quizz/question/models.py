@@ -21,3 +21,4 @@ class Student(models.Model):
     student=models.ForeignKey(User,on_delete=models.CASCADE)
     slevel= models.IntegerField(default=1)
     score=models.IntegerField(default=0)
+    liked=models.ManyToManyField(Question, blank=True, related_name="likes")

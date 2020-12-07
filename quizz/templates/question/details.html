@@ -1,8 +1,4 @@
-{% extends "question/base.html" %}
-{% load static %}
-
-{% block content %}
-
+{% extends "question/base.html" %} {% load static %} {% block content %} 
 {% include "question/header.html" %}
 <div class="details">
   <div class="ques">
@@ -11,70 +7,112 @@
   </div>
   <form id="form" method="POST">
     {% csrf_token %}
-    <input type="text" name="ans" id="answer" placeholder="Answer" required autocomplete="off" />
+    <input
+      type="text"
+      name="ans"
+      id="answer"
+      placeholder="Answer"
+      required
+      autocomplete="off"
+    />
     <button id="button" type="submit">Submit</button>
   </form>
+  <div class="likes">
+    <button id="like-btn">
+      {% if liked %}
+      <img src="{% static "question/images/like-icon-filled.svg" %}" alt="liked" class="like-icon">
+      {% else %}
+      <img src="{% static "question/images/like-icon.svg" %}" alt="yet to like" class="like-icon">
+      {% endif %}
+    </button>
+    <span id="like-count">{{ like_count }}</span>
+  </div>
 </div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
   let count = 120;
-  let minutes,seconds;
-  setInterval(function() {
-    minutes = parseInt(count / 60 , 10);
-    seconds = parseInt(count % 60 , 10);
+  let minutes, seconds;
+  setInterval(function () {
+    minutes = parseInt(count / 60, 10);
+    seconds = parseInt(count % 60, 10);
     minutes = minutes < 10 ? "0" + minutes : minutes;
     seconds = seconds < 10 ? "0" + seconds : seconds;
-    document.getElementById('timer').textContent = minutes + ":" + seconds;
+    document.getElementById("timer").textContent = minutes + ":" + seconds;
     count = count - 1;
-    if (count < 0){
+    if (count < 0) {
       $.ajax({
         type: "POST",
         url: "{% url 'detail' %}",
         data: {
-          csrfmiddlewaretoken: '{{ csrf_token }}',
-          expired: 'YES'
+          csrfmiddlewaretoken: "{{ csrf_token }}",
+          expired: "YES",
         },
-        success: data => {
-          if (data.ques === 'done') {
-            window.location.href = '/end/' + parseInt(data.score)
+        success: (data) => {
+          if (data.ques === "done") {
+            window.location.href = "/end/" + parseInt(data.score);
           }
           let ques = data.ques;
-          if (ques !== 'wrong' && ques !== 'done') {
-            $('#ques').html(ques)
-            $('#form')[0].reset()
+          if (ques !== "wrong" && ques !== "done") {
+            $("#ques").html(ques);
+            $("#form")[0].reset();
             count = 120;
           }
-        }
-      })
+        update_like_count();
+        },
+      });
     }
-  }, 1000)
+  }, 1000);
 
-  $('#form').on('submit', e => {
+  $("#form").on("submit", (e) => {
     e.preventDefault();
     $.ajax({
       type: "POST",
       url: "{% url 'detail' %}",
       data: {
-        csrfmiddlewaretoken: '{{ csrf_token }}',
-        ans: $('#answer').val(),
-        expired: "NO"
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+        ans: $("#answer").val(),
+        expired: "NO",
       },
-      success: data => {
-        if (data.ques === 'done') {
-          window.location.href = '/end/' + parseInt(data.score)
+      success: (data) => {
+        if (data.ques === "done") {
+          window.location.href = "/end/" + parseInt(data.score);
         }
         if (data.ques !== "wrong" && data.ques !== "done") {
-          $("#ques").html(data.ques)
-          $('#form')[0].reset()
-          count = 120
+          $("#ques").html(data.ques);
+          $("#form")[0].reset();
+          count = 120;
         }
-        if (data.ques === "wrong"){
-           $('#form')[0].reset()
+        if (data.ques === "wrong") {
+          $("#form")[0].reset();
         }
+       update_like_count();
+      },
+    });
+  });
+
+  $("#like-btn").on("click", (e) => {
+   update_like_count("YES");
+  });
+
+  function update_like_count(a = "NO"){
+    $.ajax({
+      type: "POST",
+      url: "{% url 'like' %}",
+      data: {
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+        update_like: a
+      },
+      success: (data) => {
+        if (data.liked)
+          $(".like-icon").attr("src", "{% static "question/images/like-icon-filled.svg" %}")
+        else
+          $(".like-icon").attr("src", "{% static "question/images/like-icon.svg" %}")
+        $("#like-count").text(data.like_count)
       }
-    })
-  })
+    });
+  }
+
 </script>
 
 {% endblock %}

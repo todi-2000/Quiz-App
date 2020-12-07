@@ -27,7 +27,7 @@ def details(request):
         try:
             quest=Question.objects.get(level=level)
             choice=str(Choice.objects.get(question=quest.id))
-            context = {'ques':quest, "auth": request.user.is_authenticated}
+            context = {'ques':quest, "auth": request.user.is_authenticated, "like_count": len(quest.likes.all()), "liked": quest in st.liked.all()}
             if request.method=='POST':
                 if request.POST.get("expired") == "YES":
                     level += 1
@@ -75,3 +75,19 @@ def end(request, score):
     else:
         a = False
         return render(request, "question/quiz-end-page.html", {"score": score})
+
+def like(request):
+    if request.method == "POST" and request.user.is_authenticated:
+        st=Student.objects.get(student=request.user)
+        level=st.slevel
+        quest=Question.objects.get(level=level)
+        print(quest.question_text);
+        if request.POST.get("update_like") == "YES":
+            liked = quest in st.liked.all()
+            if liked:
+                st.liked.remove(quest)
+            else:
+                st.liked.add(quest)
+            st.save()
+        return JsonResponse({"like_count": len(quest.likes.all()), "liked": quest in st.liked.all()})
+    raise Http404("Wrong Request")
