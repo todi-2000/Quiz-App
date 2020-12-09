@@ -17,7 +17,7 @@
   </head>
   <body>
     {% block content %} {% endblock content %}
-    <div>
+    <div class="msgs">
       {% for message in messages %}
         <p class= {{message.tags}}>{{message}}</p>
       {% endfor %}

@@ -56,6 +56,10 @@
           if (ques !== "wrong" && ques !== "done") {
             $("#ques").html(ques);
             $("#form")[0].reset();
+            $(".msgs").append($("<p></p>").addClass("info").text("Time over, Moving on to next question"));
+            setTimeout(function(){
+              $(".msgs > p").remove();
+            }, 3000);
             count = 120;
           }
         update_like_count();
@@ -85,6 +89,10 @@
         }
         if (data.ques === "wrong") {
           $("#form")[0].reset();
+          $(".msgs").append($("<p></p>").addClass("error").text("Wrong Answer, Please try again.."));
+          setTimeout(function(){
+            $(".msgs > p").remove();
+          }, 3000);
         }
        update_like_count();
       },
