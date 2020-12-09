@@ -7,14 +7,17 @@
   </div>
   <form id="form" method="POST">
     {% csrf_token %}
-    <input
-      type="text"
-      name="ans"
-      id="answer"
-      placeholder="Answer"
-      required
-      autocomplete="off"
-    />
+    <div class="ques-label">
+      <input
+        type="text"
+        name="ans"
+        id="answer"
+        placeholder="Answer"
+        required
+        autocomplete="off"
+      />
+      <img class="status">
+    </div>
     <button id="button" type="submit">Submit</button>
   </form>
   <div class="likes">
@@ -56,6 +59,7 @@
           if (ques !== "wrong" && ques !== "done") {
             $("#ques").html(ques);
             $("#form")[0].reset();
+            $(".status").attr("src", "").attr("alt", "");
             count = 120;
           }
         update_like_count();
@@ -81,9 +85,11 @@
         if (data.ques !== "wrong" && data.ques !== "done") {
           $("#ques").html(data.ques);
           $("#form")[0].reset();
+          $(".status").attr("src", "").attr("alt", "");
           count = 120;
         }
         if (data.ques === "wrong") {
+          $(".status").attr("src", "").attr("alt", "");
           $("#form")[0].reset();
         }
        update_like_count();
@@ -112,6 +118,24 @@
       }
     });
   }
+
+  $("#answer").on("input", function(){
+    console.log($("#answer").val());
+    $.ajax({
+      type: "POST",
+      url: "{% url 'status' %}",
+      data: {
+        csrfmiddlewaretoken: "{{ csrf_token }}",
+        ans: $("#answer").val()
+      },
+      success: (data) => {
+        if (data.isCorrect)
+          $(".status").attr("src", "{% static "question/images/success.svg" %}").attr("alt", "Correct answer")
+        else 
+          $(".status").attr("src", "{% static "question/images/wrong.svg" %}").attr("alt", "Wrong answer")
+      }
+    })
+  })
 
 </script>
 

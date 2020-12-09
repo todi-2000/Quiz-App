@@ -7,5 +7,6 @@ urlpatterns = [
     path('questions/',views.details,name='detail'),
     path('leaderboard/',views.leaderboard,name='leaderboard'),
     path("end/<int:score>", views.end, name="end"),
-    path("like", views.like, name="like")
+    path("like", views.like, name="like"),
+    path("status", views.status, name="status")
 ]

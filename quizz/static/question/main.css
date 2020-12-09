@@ -153,6 +153,18 @@ form {
   text-align: center;
 }
 
+form .ques-label{
+  width: 100%;
+  position: relative;
+}
+
+form .ques-label .status{
+  position: absolute;
+  width: 2rem;
+  right: 1.3rem;
+  top: 1.7rem;
+}
+
 form input {
   display: block;
   width: 100%;
