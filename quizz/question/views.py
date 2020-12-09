@@ -38,7 +38,7 @@ def details(request):
                         context={'ques':nextques}
                         return JsonResponse({'ques': nextques.question_text})
                     except Question.DoesNotExist:
-                        return JsonResponse({'ques': 'done'})
+                        return JsonResponse({'ques': 'done', "score": st.score})
                 else:
                     c=request.POST['ans']
                     if c.lower() == choice.lower(): #correct

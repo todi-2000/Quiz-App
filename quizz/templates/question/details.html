@@ -53,13 +53,21 @@
         },
         success: (data) => {
           if (data.ques === "done") {
-            window.location.href = "/end/" + parseInt(data.score);
+            window.location.href = "{% url "home" %}";
+            $(".msgs").append($("<p></p>").addClass("info").text(`Time over, Your score is ${parseInt(data.score)}`));
+            setTimeout(function(){
+              $(".msgs > p").remove();
+            }, 3000);
           }
           let ques = data.ques;
           if (ques !== "wrong" && ques !== "done") {
             $("#ques").html(ques);
             $("#form")[0].reset();
             $(".status").attr("src", "").attr("alt", "");
+            $(".msgs").append($("<p></p>").addClass("info").text("Time over, Moving on to next question"));
+            setTimeout(function(){
+              $(".msgs > p").remove();
+            }, 3000);
             count = 120;
           }
         update_like_count();
@@ -91,6 +99,10 @@
         if (data.ques === "wrong") {
           $(".status").attr("src", "").attr("alt", "");
           $("#form")[0].reset();
+          $(".msgs").append($("<p></p>").addClass("error").text("Wrong Answer, Please try again.."));
+          setTimeout(function(){
+            $(".msgs > p").remove();
+          }, 3000);
         }
        update_like_count();
       },
