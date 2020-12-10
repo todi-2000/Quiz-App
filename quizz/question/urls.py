@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include
 from . import views
 
 urlpatterns = [
@@ -8,5 +8,7 @@ urlpatterns = [
     path('leaderboard/',views.leaderboard,name='leaderboard'),
     path("end/<int:score>", views.end, name="end"),
     path("like", views.like, name="like"),
-    path("status", views.status, name="status")
+    path("status", views.status, name="status"),
+
+    path('api/', include('question.api.urls'))
 ]
