@@ -38,7 +38,7 @@ def details(request):
                         context={'ques':nextques}
                         return JsonResponse({'ques': nextques.question_text})
                     except Question.DoesNotExist:
-                        return JsonResponse({'ques': 'done'})
+                        return JsonResponse({'ques': 'done', "score": st.score})
                 else:
                     c=request.POST['ans']
                     if c.lower() == choice.lower(): #correct
@@ -91,3 +91,12 @@ def like(request):
             st.save()
         return JsonResponse({"like_count": len(quest.likes.all()), "liked": quest in st.liked.all()})
     raise Http404("Wrong Request")
+
+def status(request):
+   if request.method == "POST" and request.user.is_authenticated:
+        st=Student.objects.get(student=request.user)
+        level=st.slevel
+        quest=Question.objects.get(level=level)
+        choice=str(Choice.objects.get(question=quest.id))
+        c = request.POST.get("ans")
+        return JsonResponse({"isCorrect": c.lower() == choice.lower()})
