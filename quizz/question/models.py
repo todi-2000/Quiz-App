@@ -9,6 +9,14 @@ class Question(models.Model):
 
     def __str__(self):
         return self.question_text
+    
+    def save(self, *args, **kwargs):
+        last_level = Question.objects.all().aggregate(largest=models.Max('level'))['largest']
+        if last_level:
+            self.level = last_level+1
+        else:
+            self.level = 1
+        super(Question, self).save(*args, **kwargs)
 
 class Choice(models.Model):
     question=models.ForeignKey(Question,on_delete=models.CASCADE)
