@@ -22,3 +22,6 @@ class Student(models.Model):
     slevel= models.IntegerField(default=1)
     score=models.IntegerField(default=0)
     liked=models.ManyToManyField(Question, blank=True, related_name="likes")
+
+    def __str__(self):
+        return self.username
