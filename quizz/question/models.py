@@ -1,11 +1,13 @@
 from django.db import models
 from django.contrib.auth.forms import User
+from taggit.managers import TaggableManager
 
 # Create your models here.
 class Question(models.Model):
     question_text=models.CharField(max_length=600)
     max_marks=models.DecimalField(default=0,decimal_places=2,max_digits=6)
     level=models.IntegerField(blank=True, null=True)
+    tags = TaggableManager(blank=True)
 
     def __str__(self):
         return self.question_text
