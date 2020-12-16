@@ -134,6 +134,12 @@ git push --set-upstream origin <branch_name>
 |                                                                                                                                                                                     **[Manshi Todi](https://www.linkedin.com/in/manshi-todi-a017a2178/)**                                                                                                                                                                                      |
 | <a href="https://twitter.com/manshitodi"><img src="https://openvisualfx.com/wp-content/uploads/2019/10/pnglot.com-twitter-bird-logo-png-139932.png" width="32px" height="32px"></a> <a href="https://www.linkedin.com/in/manshi-todi-a017a2178/"><img src="https://mpng.subpng.com/20180324/vhe/kisspng-linkedin-computer-icons-logo-social-networking-ser-facebook-5ab6ebfe5f5397.2333748215219374063905.jpg" width="32px" height="32px"></a> |
 
+## Contributors ✨ 
+
+<a href="https://github.com/todi-2000/Quiz-App/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=todi-2000/Quiz-App" />
+</a>
+
 ## Like This? Star ⭐ & Fork this Repo.
 
 > Made By Manshi Todi with ❤️
