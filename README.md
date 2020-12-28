@@ -82,6 +82,11 @@ git checkout -b <branch-name>
 python -m venv env
 env\Scripts\activate
 ```
+- Install dependencies using
+
+```
+pip install -r requirements.txt
+```
 
 - Change Directory:
 
@@ -89,11 +94,6 @@ env\Scripts\activate
 cd quizz
 ```
 
-- Install dependencies using
-
-```
-pip install -r requirements.txt
-```
 
 - Make migrations using
 
