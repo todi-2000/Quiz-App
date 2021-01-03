@@ -3,7 +3,7 @@
 <div class="details">
   <div class="ques">
     <h1 id="ques">{{ ques.question_text }}</h1>
-    <p id="timer">02:00</p>
+    <p id="timer">Timer</p>
   </div>
   <form id="form" method="POST">
     {% csrf_token %}
@@ -23,9 +23,9 @@
   <div class="likes">
     <button id="like-btn">
       {% if liked %}
-      <img src="{% static "question/images/like-icon-filled.svg" %}" alt="liked" class="like-icon">
+      <img src="{% static 'question/images/like-icon-filled.svg' %}" alt="liked" class="like-icon">
       {% else %}
-      <img src="{% static "question/images/like-icon.svg" %}" alt="yet to like" class="like-icon">
+      <img src="{% static 'question/images/like-icon.svg' %}" alt="yet to like" class="like-icon">
       {% endif %}
     </button>
     <span id="like-count">{{ like_count }}</span>
@@ -34,7 +34,7 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script type="text/javascript">
-  let count = 120;
+  let count = localStorage.getItem('count');
   let minutes, seconds;
   setInterval(function () {
     minutes = parseInt(count / 60, 10);
@@ -43,6 +43,7 @@
     seconds = seconds < 10 ? "0" + seconds : seconds;
     document.getElementById("timer").textContent = minutes + ":" + seconds;
     count = count - 1;
+    localStorage.setItem('count', count)
     if (count < 0) {
       $.ajax({
         type: "POST",
@@ -53,7 +54,7 @@
         },
         success: (data) => {
           if (data.ques === "done") {
-            window.location.href = "{% url "home" %}";
+            window.location.href = "{% url 'home' %}";
             $(".msgs").append($("<p></p>").addClass("info").text(`Time over, Your score is ${parseInt(data.score)}`));
             setTimeout(function(){
               $(".msgs > p").remove();
@@ -69,6 +70,7 @@
               $(".msgs > p").remove();
             }, 3000);
             count = 120;
+            localStorage.setItem('count', count)
           }
         update_like_count();
         },
@@ -95,6 +97,7 @@
           $("#form")[0].reset();
           $(".status").attr("src", "").attr("alt", "");
           count = 120;
+          localStorage.setItem('count', count)
         }
         if (data.ques === "wrong") {
           $(".status").attr("src", "").attr("alt", "");
@@ -123,9 +126,9 @@
       },
       success: (data) => {
         if (data.liked)
-          $(".like-icon").attr("src", "{% static "question/images/like-icon-filled.svg" %}")
+          $(".like-icon").attr("src", "{% static 'question/images/like-icon-filled.svg' %}")
         else
-          $(".like-icon").attr("src", "{% static "question/images/like-icon.svg" %}")
+          $(".like-icon").attr("src", "{% static 'question/images/like-icon.svg' %}")
         $("#like-count").text(data.like_count)
       }
     });
@@ -142,9 +145,9 @@
       },
       success: (data) => {
         if (data.isCorrect)
-          $(".status").attr("src", "{% static "question/images/success.svg" %}").attr("alt", "Correct answer")
+          $(".status").attr("src", "{% static 'question/images/success.svg' %}").attr("alt", "Correct answer")
         else 
-          $(".status").attr("src", "{% static "question/images/wrong.svg" %}").attr("alt", "Wrong answer")
+          $(".status").attr("src", "{% static 'question/images/wrong.svg' %}").attr("alt", "Wrong answer")
       }
     })
   })
