@@ -1,6 +1,7 @@
 
 ﻿<p align="center">
-  <a href="#"><img src="https://capsule-render.vercel.app/api?type=rect&color=009ACD&height=100&section=header&text=QuizApps&fontSize=60%&fontColor=ffffff" alt="website title image"></a>
+  <a href="ec2-3-140-189-226.us-east-2.compute.amazonaws.com"><img src="https://capsule-render.vercel.app/api?type=rect&color=009ACD&height=100&section=header&text=QuizApps&fontSize=60%&fontColor=ffffff" alt="website title image"></a>
+  <h2 align="center">👉 <a href="ec2-3-140-189-226.us-east-2.compute.amazonaws.com" >WebSite👈</a></h2>
   <h2 align="center">👉 A Quiz App in Django👈</h2>
 </p>
 
