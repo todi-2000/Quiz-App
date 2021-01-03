@@ -1,5 +1,3 @@
-# Contribution
-
 # How to contribute?
 
 ## Steps:
@@ -11,12 +9,14 @@
   
   -  Clone the fork [repo](https://github.com/<your_username>/Quiz-App)
      - `git clone https://https://github.com/<your_username>/Quiz-App`
-    
-  -  Create new branch
-     - `git checkout -b <Your-Branch-Name>`
+ 
+  - Go to the directory
+     - `cd Quiz-App`
   
+  - Make changes in the script for related issues
+     
   -  Add code/scripts related to your respective issues.
-     - `git add <your-contribution>`
+     - `git add .`
  
   -  Add a commit message !
      - `git commit -a -m "<Add a message related to changes you made>"`
@@ -28,9 +28,6 @@
   -  Create pull requests
     - Mention the changes you have made. And add screenshot of before and after the changes.
 
-
-When contributing to this repository, please first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change. 
 
 Please note we have a code of conduct, please follow it in all your interactions with the project.
 
