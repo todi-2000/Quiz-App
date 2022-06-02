@@ -22,7 +22,7 @@
 
 ## 📌 Introduction
 
-A website where user have to only register for attempting quizzes and can also leaderboard.
+A website where user has to register only for attempting quizzes and can also see leaderboard.
 
 ## ⭐ How to get started?
 
